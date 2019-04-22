@@ -12,7 +12,8 @@
     "build": "react-scripts build",
     "test": "react-scripts test",
     "eject": "react-scripts eject",
-    "push": "git add . && git commit -m 'staged, committed and pushing to master' && git push origin master"
+    "push": "git add . && git commit -m 'staged, committed and pushing to master' && git push origin master",
+    "root": "cd ~/Desktop"
   },
   "eslintConfig": {
     "extends": "react-app"
