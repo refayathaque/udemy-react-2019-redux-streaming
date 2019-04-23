@@ -8,4 +8,4 @@ const StreamList = () => {
   );
 };
 
-export default StreamList
+export default StreamList;

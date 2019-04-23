@@ -8,4 +8,4 @@ const StreamShow = () => {
   );
 };
 
-export default StreamShow
+export default StreamShow;

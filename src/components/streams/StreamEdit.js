@@ -8,4 +8,4 @@ const StreamEdit = () => {
   );
 };
 
-export default StreamEdit
+export default StreamEdit;

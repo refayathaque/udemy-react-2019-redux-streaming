@@ -8,4 +8,4 @@ const StreamDelete = () => {
   );
 };
 
-export default StreamDelete
+export default StreamDelete;
