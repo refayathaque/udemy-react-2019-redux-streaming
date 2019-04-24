@@ -4,6 +4,7 @@ class GoogleAuth extends Component {
   constructor(props) {
     super(props)
     this.state = { isSignedIn: null };
+    this.onAuthChange = this.onAuthChange.bind(this)
   }
 
   componentDidMount() {
@@ -13,10 +14,16 @@ class GoogleAuth extends Component {
         scope: 'email'
       }).then(() => {
         this.auth = window.gapi.auth2.getAuthInstance();
-        this.setState({ isSignedIn: this.auth.isSignedIn.get() })
+        this.onAuthChange();
+        this.auth.isSignedIn.listen(this.onAuthChange);
       });
     });
   };
+
+  onAuthChange() {
+    this.setState({ isSignedIn: this.auth.isSignedIn.get() });
+    console.log(this.state)
+  }
 
   renderAuthButton() {
     if (this.state.isSignedIn === null) {
