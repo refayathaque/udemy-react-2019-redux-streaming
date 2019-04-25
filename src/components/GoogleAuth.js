@@ -1,9 +1,12 @@
 import React, { Component } from 'react';
+import { connect } from 'react-redux';
+import signIn from 'actions/signIn';
+import signOut from 'actions/signOut';
 
 class GoogleAuth extends Component {
   constructor(props) {
     super(props)
-    this.state = { isSignedIn: null };
+    // this.state = { isSignedIn: null };
     this.onAuthChange = this.onAuthChange.bind(this)
   }
 
@@ -14,15 +17,18 @@ class GoogleAuth extends Component {
         scope: 'email'
       }).then(() => {
         this.auth = window.gapi.auth2.getAuthInstance();
-        this.onAuthChange();
+        this.onAuthChange(this.auth.isSignedIn.get());
         this.auth.isSignedIn.listen(this.onAuthChange);
       });
     });
   };
 
-  onAuthChange() {
-    this.setState({ isSignedIn: this.auth.isSignedIn.get() });
-    console.log(this.state)
+  onAuthChange(isSignedIn) {
+    console.log(isSignedIn)
+    // this.setState({ isSignedIn: this.auth.isSignedIn.get() });
+    const { signIn, signOut } = this.props;
+    // If we didn't 'bind' this function to the class in the constructor lifecycle method above, or write it as an ES6 arrow function, we would not be able to access the props (in this case, the action creators from redux)
+    isSignedIn ? signIn() : signOut();
   }
 
   onSignInClick = () => {
@@ -39,9 +45,10 @@ class GoogleAuth extends Component {
   }
 
   renderAuthButton() {
-    if (this.state.isSignedIn === null) {
+    const { isSignedIn } = this.props
+    if (isSignedIn === null) {
       return null;
-    } else if (this.state.isSignedIn) {
+    } else if (isSignedIn) {
       return (
         <button className="ui red google button" onClick={this.onSignOutClick}>
           <i className="googleIcon" />
@@ -67,4 +74,15 @@ class GoogleAuth extends Component {
   };
 };
 
-export default GoogleAuth;
+const mapStateToProps = (state) => {
+  console.log(state)
+  const { isSignedIn } = state.auth
+  return {
+    isSignedIn
+  }
+}
+
+export default connect( mapStateToProps, {
+  signIn,
+  signOut
+})(GoogleAuth)
