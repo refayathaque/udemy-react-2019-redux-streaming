@@ -35,7 +35,6 @@ class GoogleAuth extends Component {
     this.auth.signIn()
   }
   // ES6 Arrow Functions can reference variables initialized anywhere in this class component, `this.auth` was initialized and assigned the value `window.gapi.auth2.getAuthInstance().signIn()` in the `componentDidMount` lifecycle method above. If we were to refactor the function above to pre-ES6 syntax (as is below), we could not reference the `this.auth` variable
-
   // onSignInClick() {
   //   window.gapi.auth2.getAuthInstance().signIn()
   // }
