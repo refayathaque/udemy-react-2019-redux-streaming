@@ -1,9 +1,10 @@
 import { SIGN_IN } from 'actions/types'
 
-const signIn = () => {
+const signIn = (userId) => {
   console.log('ACTION CREATOR, signIn')
   return {
-    type: SIGN_IN
+    type: SIGN_IN,
+    payload: userId
   };
 };
 
