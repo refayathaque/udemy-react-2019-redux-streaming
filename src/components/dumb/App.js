@@ -9,9 +9,9 @@ import { BrowserRouter, Route } from 'react-router-dom';
 // "If you are using a dynamic server that can handle dynamic URLs then you need to use the BrowserRouter component but if you are using a server that only serves static files then a HashRouter component is what to be used in this case." - https://www.techiediaries.com/react-router-dom-v4/
 // MemoryRouter - "A <Router> that keeps the history of your "URL" in memory (does not read or write to the address bar). Useful in tests and non-browser environments like React Native." - https://github.com/ReactTraining/react-router/blob/master/packages/react-router/docs/api/MemoryRouter.md
 // `MemoryRouter` and `HashRouter` must be included in the list of named imports from 'react-router-dom' above
-import Header from 'components/Header';
+import Header from 'components/dumb/Header';
 import StreamList from 'components/streams/StreamList';
-import StreamCreate from 'components/streams/StreamCreate';
+import StreamCreate from 'components/streams/smart/StreamCreate';
 import StreamShow from 'components/streams/StreamShow';
 import StreamEdit from 'components/streams/StreamEdit';
 import StreamDelete from 'components/streams/StreamDelete';
@@ -23,7 +23,7 @@ const App = () => {
         <div>
           <Header />
           <Route path="/" exact={true} component={StreamList} />
-          <Route path="/streams/create" exact={true} component={StreamCreate} />
+          <Route path="/streams/new" exact={true} component={StreamCreate} />
           <Route path="/streams/show" exact={true} component={StreamShow} />
           <Route path="/streams/edit" exact={true} component={StreamEdit} />
           <Route path="/streams/delete" exact={true} component={StreamDelete} />
