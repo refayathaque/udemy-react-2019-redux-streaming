@@ -5,7 +5,7 @@ import { Field, reduxForm } from 'redux-form';
 class StreamCreate extends Component {
   renderInput({ input }) {
     // ^ ES6 destructuring of `formsProps.input`
-    console.log(formProps)
+    // console.log(input)
     return (
       <input { ...input } />
       // `formProps.input` has the properties `value` and the `onChange` handler, the spread operator above will include these ^ properties (and more..) to the input element
