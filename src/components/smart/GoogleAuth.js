@@ -24,11 +24,11 @@ class GoogleAuth extends Component {
   };
 
   onAuthChange(isSignedIn) {
-    console.log(isSignedIn)
+    // console.log(isSignedIn)
     // this.setState({ isSignedIn: this.auth.isSignedIn.get() });
     const { signIn, signOut } = this.props;
     // If we didn't 'bind' this function to the class in the constructor lifecycle method above, or write it as an ES6 arrow function, we would not be able to access the props (in this case, the action creators from redux) or the variable `this.auth` that is initialized and assigned in the `componentDidMount` lifecycle method
-    console.log(this.auth.currentUser.get().getId())
+    // console.log(this.auth.currentUser.get().getId())
     isSignedIn ? signIn(this.auth.currentUser.get().getId()) : signOut();
   }
 
@@ -75,7 +75,7 @@ class GoogleAuth extends Component {
 };
 
 const mapStateToProps = (state) => {
-  console.log(state)
+  // console.log(state)
   const { isSignedIn } = state.auth
   return {
     isSignedIn

@@ -11,8 +11,8 @@ class StreamCreate extends Component {
   }
 
   renderInput({ input, label, meta }) {
-    // ^ ES6 destructuring of `formsProps.input`, `formsProps.label`, `forms.Props.meta`
-    console.log(meta)
+    // ^ ES6 destructuring of `formsProps.input`, `formsProps.label`, `formsProps.meta`
+    console.log('func, renderInput, formsProps.meta:', meta)
     const className = `field ${meta.error && meta.touched ? 'error' : ''}`
     return (
       <div className={className}>
@@ -38,13 +38,13 @@ class StreamCreate extends Component {
   };
 
   onSubmit(formValues) {
-    console.log(formValues)
+    console.log('func, onSubmit, formValue:', formValues)
   }
 
   render () {
     return (
       <form className="ui form error" onSubmit={this.props.handleSubmit(this.onSubmit)}>
-        {/* `handleSubmit` is how redux-form submits forms, the function will take care of things like running `event.preventDefault` to prevent page refreshes upon form submission, performing validation as per our `validate` function define below, and it also takes in whatever we pass into it such as our `onSubmit` function defined above */}
+        {/* `handleSubmit` is how redux-form submits forms, the function will take care of things like running `event.preventDefault` to prevent page refreshes upon form submission, performing validation as per our `validate` function defined below, and it also takes in whatever we pass into it such as our `onSubmit` function defined above */}
         {/* When it runs `onSubmit` it will pass in the `formValues` object to the function so that we can access the form values if we need to */}
         {/* `handleSubmit` will only run if the `validate` function returns an empty object (i.e., all validation checks pass) */}
         <Field
@@ -53,6 +53,7 @@ class StreamCreate extends Component {
           label="Enter Title"
         />
         {/* `renderInput` will get called with `formProps` from redux-form passed in */}
+        {/* `renderInput` will be invoked every time there is ANY interaction with this `Field` redux-form component (e.g., when users click and click out, and when users input values), in addition to being invoked when the `StreamCreate` component is rerendered due to state changes */}
         <Field
           name="description"
           component={this.renderInput}
@@ -65,8 +66,8 @@ class StreamCreate extends Component {
 };
 
 const validate = (formValues) => {
-  // Validation is ran every time the form is rendered to the screen or the user interacts with it, the function will get called with all values from the form
-  console.log(formValues)
+  // Validation (this function) is ran every time the form is rendered to the screen or when the user interacts with it (e.g., enters a value, but not when they simply click and click out), the function will get called with all values from the form
+  console.log('func, validate, formValues:', formValues)
   const errors = {};
   if (!formValues.title) {
     errors.title = 'You must enter a title';
