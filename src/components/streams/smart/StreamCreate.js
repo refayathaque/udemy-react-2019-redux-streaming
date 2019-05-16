@@ -3,11 +3,14 @@ import { Field, reduxForm } from 'redux-form';
 // `Field` is just a component that hooks up all the redux-form infrastructure, the infrastructure that handles the action creators/reducers for our forms and persists the form data in the Redux store
 
 // Redux-form is a way of maintaining 'controlled' elements in forms, but instead of using localized class-based state to maintain the form data, we are using the Redux store to establish a global application-level state to maintain the form data
+import { connect } from 'react-redux';
+import createStream from 'actions/createStream';
 
 class StreamCreate extends Component {
   constructor(props) {
     super(props);
     this.renderInput = this.renderInput.bind(this)
+    this.onSubmit = this.onSubmit.bind(this)
   }
 
   renderInput({ input, label, meta }) {
@@ -39,6 +42,7 @@ class StreamCreate extends Component {
 
   onSubmit(formValues) {
     console.log('func, onSubmit, formValue:', formValues)
+    this.props.createStream(formValues)
   }
 
   render () {
@@ -66,7 +70,7 @@ class StreamCreate extends Component {
 };
 
 const validate = (formValues) => {
-  // Validation (this function) is ran every time the `Field` component is rendered/rerendered to the screen because the user interacts with it (e.g., enters a value (i.e., redux-form state change), but not when they simply click/click out), the function will get called with all values from the form  (`formValues`) as an argument
+  // Validation (this function) is ran every time the `Field` components are rendered/rerendered to the screen because the user interacts with it (e.g., enters a value (i.e., redux-form state change), but not when they simply click/click out), the function will get called with all values from the form  (`formValues`) as an argument
   console.log('func, validate, formValues:', formValues)
   const errors = {};
   if (!formValues.title) {
@@ -81,9 +85,11 @@ const validate = (formValues) => {
   return errors;
 };
 
-export default reduxForm({
+const formWrapped = reduxForm({
   form: 'streamCreate',
-  // ^ This is essentially the name of the form
+  // ^ This ('streamCreate') is essentially the name of the form
   // validate: validate
   validate
 })(StreamCreate);
+
+export default connect(null, { createStream })(formWrapped)
