@@ -53,7 +53,7 @@ class StreamCreate extends Component {
           label="Enter Title"
         />
         {/* `renderInput` will get called with `formProps` from redux-form passed in */}
-        {/* `renderInput` will be invoked every time there is ANY interaction with this `Field` redux-form component (e.g., when users click/click out and when users input values (redux-form state change)), in addition to being invoked when the `StreamCreate` component is rerendered due to state changes */}
+        {/* `renderInput` will be invoked every time there is ANY interaction with this `Field` redux-form component (e.g., when users click/click out and when users input values (redux-form state change)). In addition to being invoked when the `StreamCreate` component is rerendered due to state changes, and when the component is rendered for the first time */}
         <Field
           name="description"
           component={this.renderInput}
@@ -66,7 +66,7 @@ class StreamCreate extends Component {
 };
 
 const validate = (formValues) => {
-  // Validation (this function) is ran every time the form is rendered/rerendered to the screen because the user interacts with it (e.g., enters a value (redux-form state change), but not when they simply click/click out), the function will get called with all values from the form  (`formValues`) as an argument
+  // Validation (this function) is ran every time the `Field` component is rendered/rerendered to the screen because the user interacts with it (e.g., enters a value (i.e., redux-form state change), but not when they simply click/click out), the function will get called with all values from the form  (`formValues`) as an argument
   console.log('func, validate, formValues:', formValues)
   const errors = {};
   if (!formValues.title) {
@@ -77,6 +77,7 @@ const validate = (formValues) => {
   };
   // If the form data does not pass our validation checks we return an object with key-value pairs that will have the name of the field and the error message we wish to display to the user, once we return this error details object redux-form will rerender our component
   // We return an EMPTY object if the form data passes our validation checks, returning an EMPTY object makes redux-form think that the form is valid
+  console.log('func, validate, errors:', errors)
   return errors;
 };
 
