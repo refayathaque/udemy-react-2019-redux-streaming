@@ -1,5 +1,7 @@
 import React from 'react';
-import { BrowserRouter, Route } from 'react-router-dom';
+import { Router, Route } from 'react-router-dom';
+import history from '../../history';
+// ^ Absolute import not working for some reason
 
 // BrowserRouter is the MOST COMPLICATED TO DEPLOY in most settings (there are exceptions to this, SOME deployment services will make deployments with BrowserRouter easy), and this is because most servers will not automatically serve up the `index.html` file in the public folder once it realizes that it does not have any data on requested routes other than "/" (only React servers will automatically serve up `index.html`)
 // Default behavior for most servers when it does not have data on routes other than "/" is responding with a 404
@@ -21,7 +23,7 @@ import StreamDelete from 'components/streams/StreamDelete';
 const App = () => {
   return (
     <div className="ui container">
-      <BrowserRouter>
+      <Router history={history}>
         <div>
           <Header />
           <Route path="/" exact={true} component={StreamList} />
@@ -30,7 +32,7 @@ const App = () => {
           <Route path="/streams/edit" exact={true} component={StreamEdit} />
           <Route path="/streams/delete" exact={true} component={StreamDelete} />
         </div>
-      </BrowserRouter>
+      </Router>
     </div>
   );
 };
