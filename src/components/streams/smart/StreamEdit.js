@@ -57,4 +57,4 @@ export default connect(mapStateToProps, { fetchStream, editStream })(StreamEdit)
 // ^ But this is NOT GOOD PRACTICE, we should should only pass down keys in the object that we are trying to change (relevant when thinking about RESTful APIs and the difference between PUT and PATCH requests/methods)
 // ^ e.g., initialValues={_.pick(this.props.stream, 'title', 'description')} - will produce expected outcome when using RESTful PATCH (Update SOME properties of a record)
 
-// initialValues={this.props.stream} - will produce expected outcome when using RESTful PUT (Update ALL properties of a record)
+// initialValues={this.props.stream} - will produce expected outcome when using RESTful PUT (Update ALL properties of a record).
