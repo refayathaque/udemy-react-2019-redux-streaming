@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
+import _ from 'lodash';
 import fetchStream from 'actions/fetchStream';
 import editStream from 'actions/editStream';
 import StreamForm from 'components/streams/smart/StreamForm'
@@ -27,8 +28,8 @@ class StreamEdit extends Component {
         <h3>Edit a Stream</h3>
         <StreamForm
           onSubmit={this.onSubmit}
-          initialValues={this.props.stream}
-          // initialValues={{ title: this.props.stream.title, description: this.props.stream.description }}
+          // initialValues={this.props.stream}
+          initialValues={_.pick(this.props.stream, 'title', 'description')}
         />
       </div>
     )
@@ -51,4 +52,9 @@ export default connect(mapStateToProps, { fetchStream, editStream })(StreamEdit)
 // ^ Allows us to pass down some special Redux Form props, e.g., `initialValues`
 
 //The `initialValues` object passed down must map to the `Field` component `name` props, this has to happen in order for the `Field` component to automatically render with the corresponding values
-// The object being passed down can have ADDITIONAL keys that will not correspond to the `Field` component `name` props
+
+// The object being passed down MAY HAVE ADDITIONAL keys that will not correspond to the `Field` component `name` props
+// ^ But this is NOT GOOD PRACTICE, we should should only pass down keys in the object that we are trying to change (relevant when thinking about RESTful APIs and the difference between PUT and PATCH requests/methods)
+// ^ e.g., initialValues={_.pick(this.props.stream, 'title', 'description')} - will produce expected outcome when using RESTful PATCH (Update SOME properties of a record)
+
+// initialValues={this.props.stream} - will produce expected outcome when using RESTful PUT (Update ALL properties of a record)

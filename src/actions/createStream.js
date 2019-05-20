@@ -16,7 +16,7 @@ const createStream = (formValues) => {
       type: CREATE_STREAM,
       payload: response.data
     });
-    history.push('/')
+    history.push('/');
     // ^ Programmatic navigation
   };
 };
