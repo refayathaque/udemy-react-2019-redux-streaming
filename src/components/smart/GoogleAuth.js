@@ -28,6 +28,7 @@ class GoogleAuth extends Component {
     // this.setState({ isSignedIn: this.auth.isSignedIn.get() });
     const { signIn, signOut } = this.props;
     // If we didn't 'bind' this function to the class in the constructor lifecycle method above, or write it as an ES6 arrow function, we would not be able to access the props (in this case, the action creators from redux) or the variable `this.auth` that is initialized and assigned in the `componentDidMount` lifecycle method
+    // ^ Resulting error without binding or arrow syntax: TypeError: Cannot read property 'props' of undefined
     // console.log(this.auth.currentUser.get().getId())
     isSignedIn ? signIn(this.auth.currentUser.get().getId()) : signOut();
   }

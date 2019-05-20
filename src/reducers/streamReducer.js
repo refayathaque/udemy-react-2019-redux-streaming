@@ -15,12 +15,12 @@ const streamReducer = (state = {}, action) => {
     case FETCH_STREAM:
       console.log('streamReducer, action.type: FETCH_STREAM')
       return { ...state, [action.payload.id]: action.payload };
+      case EDIT_STREAM:
+      console.log('streamReducer, action.type: EDIT_STREAM')
+      return { ...state, [action.payload.id]: action.payload };
     case DELETE_STREAM:
       console.log('streamReducer, action.type: DELETE_STREAM')
       return _.omit(state, action.payload);
-    case EDIT_STREAM:
-      console.log('streamReducer, action.type: EDIT_STREAM')
-      return { ...state, [action.payload.id]: action.payload };
     default:
       return state;
   };
