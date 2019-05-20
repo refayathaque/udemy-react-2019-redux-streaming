@@ -12,7 +12,7 @@ import { BrowserRouter, Route } from 'react-router-dom';
 // `MemoryRouter` and `HashRouter` must be included in the list of named imports from 'react-router-dom' above
 
 import Header from 'components/dumb/Header';
-import StreamList from 'components/streams/StreamList';
+import StreamList from 'components/streams/smart/StreamList';
 import StreamCreate from 'components/streams/smart/StreamCreate';
 import StreamShow from 'components/streams/StreamShow';
 import StreamEdit from 'components/streams/StreamEdit';
