@@ -27,7 +27,8 @@ class StreamEdit extends Component {
         <h3>Edit a Stream</h3>
         <StreamForm
           onSubmit={this.onSubmit}
-          initialValues={{ title: this.props.stream.title, description: this.props.stream.description }}
+          initialValues={this.props.stream}
+          // initialValues={{ title: this.props.stream.title, description: this.props.stream.description }}
         />
       </div>
     )
@@ -50,3 +51,4 @@ export default connect(mapStateToProps, { fetchStream, editStream })(StreamEdit)
 // ^ Allows us to pass down some special Redux Form props, e.g., `initialValues`
 
 //The `initialValues` object passed down must map to the `Field` component `name` props, this has to happen in order for the `Field` component to automatically render with the corresponding values
+// The object being passed down can have ADDITIONAL keys that will not correspond to the `Field` component `name` props
