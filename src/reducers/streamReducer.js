@@ -3,15 +3,15 @@ import { CREATE_STREAM, FETCH_STREAMS, FETCH_STREAM, DELETE_STREAM, EDIT_STREAM 
 
 const streamReducer = (state = {}, action) => {
   switch(action.type) {
+    case FETCH_STREAMS:
+    console.log('streamReducer, action.type: FETCH_STREAMS')
+    return { ...state, ..._.mapKeys(action.payload, 'id') };
+    // Spread operator with objects is used to make a copy of an existing object or to make a new object with more properties
+    // With spread operators on both `state` and `mapKeys` we are merging the two objects
     case CREATE_STREAM:
       console.log('streamReducer, action.type: CREATE_STREAM')
       return { ...state, [action.payload.id]: action.payload };
       // ES6 Key Interpolation Syntax / Dynamic Property Keys
-    case FETCH_STREAMS:
-      console.log('streamReducer, action.type: FETCH_STREAMS')
-      return { ...state, ..._.mapKeys(action.payload, 'id') };
-      // Spread operator with objects is used to make a copy of an existing object or to make a new object with more properties
-      // With spread operators on both `state` and `mapKeys` were are "combining" the two objects
     case FETCH_STREAM:
       console.log('streamReducer, action.type: FETCH_STREAM')
       return { ...state, [action.payload.id]: action.payload };
