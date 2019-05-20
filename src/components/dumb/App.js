@@ -17,7 +17,7 @@ import Header from 'components/dumb/Header';
 import StreamList from 'components/streams/smart/StreamList';
 import StreamCreate from 'components/streams/smart/StreamCreate';
 import StreamShow from 'components/streams/StreamShow';
-import StreamEdit from 'components/streams/StreamEdit';
+import StreamEdit from 'components/streams/smart/StreamEdit';
 import StreamDelete from 'components/streams/StreamDelete';
 
 const App = () => {

@@ -4,13 +4,13 @@ import history from '../history';
 // ^ Absolute import not working for some reason
 
 const createStream = (formValues) => {
-  console.log('ACTION CREATOR, createStream')
+  console.log('Action Creator, CREATE_STREAM')
   return async (dispatch, getState) => {
     // Redux Thunk `getState` allows us to access the Redux store state object in action creators
     const { userId } = getState().auth
     const response = await streams.post('/streams', { ...formValues, userId });
     // ^ same as `[userId]: userId`
-    console.log('ACTION CREATOR, response:', response.data)
+    console.log('Action Creator, response:', response.data)
 
     dispatch({
       type: CREATE_STREAM,
