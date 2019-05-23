@@ -1,5 +1,6 @@
 import streams from 'apis/streams';
 import { DELETE_STREAM } from 'actions/types';
+import history from '../history';
 
 const deleteStream = (id) => {
   console.log('Action Creator, DELETE_STREAM')
@@ -12,6 +13,7 @@ const deleteStream = (id) => {
       type: DELETE_STREAM,
       payload: id
     });
+    history.push('/');
   };
 };
 

@@ -1,7 +1,9 @@
 import React, { Component } from 'react';
 import Modal from 'components/dumb/Modal';
 import { connect } from 'react-redux';
+import { Link } from 'react-router-dom';
 import fetchStream from 'actions/fetchStream';
+import deleteStream from 'actions/deleteStream';
 import history from '../../history';
 
 class StreamDelete extends Component {
@@ -14,12 +16,18 @@ class StreamDelete extends Component {
   };
 
   renderActions = () => {
+    const { id } = this.props.match.params
+    // ^ ES6 Destructuring
+
     return (
       <React.Fragment>
-        <button onClick={this.onDismiss} className="ui button negative">Delete</button>
-        <button onClick={this.onDismiss} className="ui button">Cancel</button>
+        <button onClick={() => this.props.deleteStream(id)} className="ui button negative">Delete</button>
+        <Link to="/" className="ui button">Cancel</Link>
       </React.Fragment>
     );
+    // `<button onClick={this.deleteStream(id)} ...>Delete</button> will call the `deleteStream` action creator right when the button is rendered, instead of waiting to be clicked on
+    // Not sure why this ^ is, but to prevent such behavior we need to compose the callback using the syntax above
+
   };
 
   renderContent = () => {
@@ -51,7 +59,7 @@ const mapStateToProps = (state, ownProps) => {
   }
 }
 
-export default connect(mapStateToProps, { fetchStream })(StreamDelete);
+export default connect(mapStateToProps, { fetchStream, deleteStream })(StreamDelete);
 
 // Notes:
 
