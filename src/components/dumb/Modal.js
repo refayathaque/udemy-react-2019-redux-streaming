@@ -1,12 +1,7 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-import history from '../../history';
 
 const Modal = (props) => {
-  const returnToStreamList = () => {
-    history.push('/');
-  };
-
   const stopPropagation = (e) => {
     e.stopPropagation();
   };
@@ -14,7 +9,7 @@ const Modal = (props) => {
   // `return` statement is specific to React Portals, different from regular functional/dumb components
   // ReactDOM function of `createPortal` is similar in syntax to the `render` function in `index.js` in the `src` folder, it takes two arguments and one of the is the `document.querySelector` function (reference to an html element in the `index.html` file in the `public` folder)
   return ReactDOM.createPortal(
-    <div onClick={returnToStreamList} className="ui dimmer modals visible active">
+    <div onClick={props.onDismiss} className="ui dimmer modals visible active">
       <div onClick={stopPropagation} className="ui standard modal visible active">
         <div className="header">{props.title}</div>
         <div className="content">{props.content}</div>

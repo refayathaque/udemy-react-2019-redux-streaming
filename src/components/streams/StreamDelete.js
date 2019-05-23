@@ -1,27 +1,57 @@
-import React from 'react';
+import React, { Component } from 'react';
 import Modal from 'components/dumb/Modal';
+import { connect } from 'react-redux';
+import fetchStream from 'actions/fetchStream';
+import history from '../../history';
 
-const StreamDelete = () => {
-  const actions = (
-    <React.Fragment>
-      <button className="ui button negative">Delete</button>
-      <button className="ui button">Cancel</button>
-    </React.Fragment>
-  );
+class StreamDelete extends Component {
+  componentDidMount() {
+    this.props.fetchStream(this.props.match.params.id);
+  }
 
-  return (
-    <div>
+  onDismiss = () => {
+    history.push('/');
+  };
+
+  renderActions = () => {
+    return (
+      <React.Fragment>
+        <button onClick={this.onDismiss} className="ui button negative">Delete</button>
+        <button onClick={this.onDismiss} className="ui button">Cancel</button>
+      </React.Fragment>
+    );
+  };
+
+  renderContent = () => {
+    if (!this.props.stream) {
+      return (
+        'Are you sure you want to delete this stream?'
+      );
+    };
+    return (
+      `Are you sure you want to delete with title: ${this.props.stream.title}`
+    )
+  };
+
+  render() {
+    return (
       <Modal
         title="Delete Stream"
-        content="Are you sure you want to delete this stream"
-        actions={actions}
+        content={this.renderContent()}
+        actions={this.renderActions()}
+        onDismiss={this.onDismiss}
       />
-    </div>
-  );
+    );
+  };
 };
 
+const mapStateToProps = (state, ownProps) => {
+  return {
+    stream: state.streams[ownProps.match.params.id]
+  }
+}
 
-export default StreamDelete;
+export default connect(mapStateToProps, { fetchStream })(StreamDelete);
 
 // Notes:
 
@@ -39,3 +69,5 @@ export default StreamDelete;
   <button className="ui button negative">Delete</button>
   <button className="ui button">Cancel</button>
 </div> */}
+
+// <React.Fragment></React.Fragment> can also be written simply as <></>, but some linters out there can flag this as invalid syntax
