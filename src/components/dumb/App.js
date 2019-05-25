@@ -1,13 +1,13 @@
 import React from 'react';
-import { Router, Route } from 'react-router-dom';
+import { Router, Route, Switch } from 'react-router-dom';
 import history from '../../history';
 // ^ Absolute import not working for some reason
 import Header from 'components/dumb/Header';
 import StreamList from 'components/streams/smart/StreamList';
 import StreamCreate from 'components/streams/smart/StreamCreate';
-import StreamShow from 'components/streams/StreamShow';
+import StreamShow from 'components/streams/smart/StreamShow';
 import StreamEdit from 'components/streams/smart/StreamEdit';
-import StreamDelete from 'components/streams/StreamDelete';
+import StreamDelete from 'components/streams/smart/StreamDelete';
 
 const App = () => {
   return (
@@ -15,11 +15,13 @@ const App = () => {
       <Router history={history}>
         <div>
           <Header />
-          <Route path="/" exact={true} component={StreamList} />
-          <Route path="/streams/new" exact={true} component={StreamCreate} />
-          <Route path="/streams/:id" exact={true} component={StreamShow} />
-          <Route path="/streams/edit/:id" exact={true} component={StreamEdit} />
-          <Route path="/streams/delete/:id" exact={true} component={StreamDelete} />
+          <Switch>
+            <Route path="/" exact={true} component={StreamList} />
+            <Route path="/streams/new" exact={true} component={StreamCreate} />
+            <Route path="/streams/:id" exact={true} component={StreamShow} />
+            <Route path="/streams/edit/:id" exact={true} component={StreamEdit} />
+            <Route path="/streams/delete/:id" exact={true} component={StreamDelete} />
+          </Switch>
         </div>
       </Router>
     </div>
@@ -45,6 +47,11 @@ export default App;
 
 // MemoryRouter - "Keeps the history of your "URL" in memory (does not read or write to the address bar). Useful in tests and non-browser environments like React Native." - https://github.com/ReactTraining/react-router/blob/master/packages/react-router/docs/api/MemoryRouter.md
 
-// * Router - (Used in this component) "The most common use-case for using the low-level <Router> is to synchronize a custom history with a state management lib like Redux or Mobx. Note that this is not required to use state management libs alongside React Router, it’s only for deep integration." 
+// `MemoryRouter` and `HashRouter` must be included in the list of named imports from 'react-router-dom' above
 
-// `MemoryRouter`/`HashRouter`/`BrowserRouter`/`Router` must be included in the list of named imports from 'react-router-dom' above
+// `Switch` - Renders the first child <Route> or <Redirect> that matches the location ONLY. <Switch> is unique in that it renders a route exclusively. In contrast, every <Route> that matches the location renders inclusively.
+// <Route path="/about" component={About}/>
+// <Route path="/:user" component={User}/>
+// <Route component={NoMatch}/>
+// If the URL is /about, then <About>, <User> (because of the WILDCARD `/:user`), and <NoMatch> will all render because they all match the path. Occasionally, however, we want to pick only one <Route> to render. If we’re at /about we don’t want to also match /:user (or show our “404” page). Now, if we’re at /about, <Switch> will start looking for a matching <Route>. <Route path="/about"/> will match and <Switch> will stop looking for matches and render <About>. Similarly, if we’re at /michael then <User> will render.
+// ^ ORDER MATTERS HERE
