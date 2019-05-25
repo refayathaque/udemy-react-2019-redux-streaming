@@ -4,7 +4,7 @@ import { connect } from 'react-redux';
 import { Link } from 'react-router-dom';
 import fetchStream from 'actions/fetchStream';
 import deleteStream from 'actions/deleteStream';
-import history from '../../history';
+import history from '../../../history';
 
 class StreamDelete extends Component {
   componentDidMount() {
