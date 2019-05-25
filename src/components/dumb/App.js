@@ -49,6 +49,10 @@ export default App;
 
 // `MemoryRouter` and `HashRouter` must be included in the list of named imports from 'react-router-dom' above
 
+// Router - (Used in this component) "The most common use-case for using the low-level <Router> is to synchronize a custom history with a state management lib like Redux or Mobx. Note that this is not required to use state management libs alongside React Router, it’s only for deep integration."
+
+// `MemoryRouter`/`HashRouter`/`BrowserRouter`/`Router` must be included in the list of named imports from 'react-router-dom' above
+
 // `Switch` - Renders the first child <Route> or <Redirect> that matches the location ONLY. <Switch> is unique in that it renders a route exclusively. In contrast, every <Route> that matches the location renders inclusively.
 // <Route path="/about" component={About}/>
 // <Route path="/:user" component={User}/>
