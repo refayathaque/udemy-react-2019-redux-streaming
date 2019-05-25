@@ -45,7 +45,7 @@ export default App;
 
 // "If you are using a dynamic server that can handle dynamic URLs then you need to use the BrowserRouter component but if you are using a server that only serves static files then a HashRouter component is what to be used in this case." - https://www.techiediaries.com/react-router-dom-v4/
 
-// MemoryRouter - "A <Router> that keeps the history of your "URL" in memory (does not read or write to the address bar). Useful in tests and non-browser environments like React Native." - https://github.com/ReactTraining/react-router/blob/master/packages/react-router/docs/api/MemoryRouter.md
+// MemoryRouter - "Keeps the history of your "URL" in memory (does not read or write to the address bar). Useful in tests and non-browser environments like React Native." - https://github.com/ReactTraining/react-router/blob/master/packages/react-router/docs/api/MemoryRouter.md
 
 // `MemoryRouter` and `HashRouter` must be included in the list of named imports from 'react-router-dom' above
 
